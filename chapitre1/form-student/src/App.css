@@ -1,0 +1,57 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+.nav{
+    display: flex;
+    color: white;
+    flex-wrap: wrap;
+    height: 50px;
+    font-size: 1.5rem;
+    align-items: center;
+    background-color: black;
+}
+.nav p{
+    margin-left: 50px;
+}
+.nav ul{
+    margin-left: 50px;
+}
+.nav a{
+    color: white;
+}
+.nav a:hover{
+    color: red;
+    border-bottom: solid 1px red;
+}
+.subContainer{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    width: 100%;
+    justify-content: space-around;
+}
+.student-input{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.student-input p{
+    font-weight: 700;
+    margin-right: 10px;
+}
+.student-input input{
+    padding: 5px;
+}
+.btn-send{
+    border-radius: 5px;
+    padding: 5px;
+}
+.studentContainer{
+    border: solid black 1px;
+    margin: 10px;
+    padding: 5px;
+}
