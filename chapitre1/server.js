@@ -14,6 +14,7 @@ app.get("/students",cors(), (req, res) => {
 app.post("/students",cors(), (req, res) => {
     const newStudent = req.body
     students.push(newStudent)
+    // res.json(console.log(newStudent))
     res.json(students)
 })
 
