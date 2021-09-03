@@ -1,11 +1,11 @@
 const expressValidator = require('express-validator');
 const passwordValidator = require('password-validator');
 
-const emailValidation = expressValidator.body("email").isEmail();
+const emailValidation = expressValidator.body("email").isEmail().normalizeEmail();
 
 const usernameValidation = expressValidator.body("username").custom( value => {
     const schema = new passwordValidator();
-    schema.is().min(4);
+    schema.is().min(4)
 
     return schema.validate(value);
 });
