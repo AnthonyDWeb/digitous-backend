@@ -18,7 +18,9 @@ const ageValidation = expressValidator.body("age").custom( value => {
 });
 const cityValidation = expressValidator.body("city").custom( value => {
     const schema = new passwordValidator();
-    schema.is().letters();
+    schema
+    .is().letters()
+    .has().not().digits();
 
     return schema.validate(value);
 });
