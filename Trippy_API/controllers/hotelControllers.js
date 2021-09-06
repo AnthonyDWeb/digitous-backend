@@ -16,6 +16,17 @@ const getHotelById = (req,res) =>{
     });
 };
 
+const getHotelNewName = (req,res) =>{
+    let id = req.params.id;
+    let newName = req.query.name;
+    let hotelIndex = hotels.findIndex( hotel => hotel.id.toString() === id)
+    hotels[hotelIndex].name = newName;
+    res.json({
+        status: "OK!",
+        data: hotels
+    });
+}; 
+
 const deleteHotelById = (req,res) =>{
     let id = req.params.id;
     let hotelToDelete = hotels.find( hotel => hotel.id.toString() === id);
@@ -48,6 +59,7 @@ const checkErrors = (req,res) => {
 module.exports = {
     getHotels: getHotels,
     getHotelById: getHotelById,
+    getHotelNewName: getHotelNewName,
     deleteHotelById: deleteHotelById,
     checkErrors: checkErrors
 }

@@ -9,16 +9,10 @@ router.get("/", hotelController.getHotels);
 router.get("/:id", hotelController.getHotelById);
 
 // ----- POST -----
-router.post("/",
-hotelMiddleware.nameValidation,
-hotelMiddleware.addressValidation,
-hotelMiddleware.cityValidation,
-hotelMiddleware.countryValidation,
-hotelMiddleware.startsValidation,
-hotelMiddleware.spaValidation,
-hotelMiddleware.poolValidation,
-hotelMiddleware.priceCategoryValidation,
-hotelController.checkErrors);
+router.post("/", hotelMiddleware.hotelCheckIn, hotelController.checkErrors);
+
+// ----- PUT -----
+router.put("/:id", hotelController.getHotelNewName);
 
 // ----- DELETE -----
 router.delete("/:id", hotelController.deleteHotelById);
