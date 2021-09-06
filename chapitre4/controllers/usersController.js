@@ -57,7 +57,7 @@ const checkErrors = (req,res) => {
             messages: "user will be add"
         })
     }
-}
+};
 
 module.exports = { 
     getAllUsers: getAllUsers,

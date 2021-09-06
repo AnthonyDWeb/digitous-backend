@@ -5,7 +5,8 @@ const router = express.Router();
 
 // ----- GET -----
 router.get("/", restaurantController.getRestaurants);
-router.get("/:id", restaurantController.getRestaurantById)
+router.get("/:id", restaurantController.getRestaurantById);
 
+// ----- POST -----
 
 module.exports = router;
