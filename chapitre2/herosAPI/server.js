@@ -1,78 +1,99 @@
-const express = require('express');
-const app = express();
-const port = 3000;
+const express = require("express");
+const cors = require ("cors")
+const dotenv = require('dotenv');
+const mongoose = require('mongoose');
 
-const superhero = [
-    {
-        name: "Iron Man",
-        power: ["money"],
-        color: "red",
-        isAlive: true,
-        age: 46,
-        image: "https://blog.fr.playstation.com/tachyon/sites/10/2019/07/unnamed-file-18.jpg?resize=1088,500&crop_strategy=smart"
+const app = express()
+
+app.use(cors())
+app.use(express.json());
+// app.use(function debug(req,res,next){console.log('it work!'); next();})
+// app.use(function tranformName(req,res,next){req.body.name = req.body.name.toLowerCase(); next();})
+dotenv.config({path: "./config.env"});
+// Connexion to DB value into config.env
+mongoose.connect(process.env.DB, {useNewUrlParser: true}).then(console.log('connected to MongoDB'));
+
+
+
+
+// Mongoose schema ( choose doc form)
+const SuperHeroesSchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true
     },
-    {
-        name: "Thor",
-        power: ["electricty", "worthy"],
-        color: "blue",
-        isAlive: true,
-        age: 300,
-        image: "https://www.bdfugue.com/media/catalog/product/cache/1/image/400x/17f82f742ffe127f42dca9de82fb58b1/9/7/9782809465761_1_75.jpg"
+    power: {
+        type: Array,
+        required: false,
+
     },
-    {
-        name: "Daredevil",
-        power: ["blind"],
-        color: "red",
-        isAlive: false,
-        age: 30,
-        image: "https://aws.vdkimg.com/film/2/5/1/1/251170_backdrop_scale_1280xauto.jpg"
+    color:{
+        type: String,
+        required: true
+    },
+    isAlive:{
+        type: Boolean,
+        required: false
+    },
+    age: {
+        type: Number,
+        required: false
+    },
+    image:{
+        type: String,
+        required: true
     }
-]
+});
 
-app.use(express.json())
+// Model to interaction with DB 
+const SuperHeroes = mongoose.model("SuperHeroes", SuperHeroesSchema);
 
-app.use(function debug(req,res,next){
-    console.log('it work!'); 
-    next();
-})
-app.use(function tranformName(req,res,next){
-    req.body.name = req.body.name.toLowerCase(); 
-    next();
-})
 
 // GET
-app.get("/heroes", (req, res) => {
-    res.json(superhero)
-})
+app.get("/heroes", async(req, res) => {
+    const superHeroes = await SuperHeroes.findOne()
+    res.json({
+        message: "ok !",
+        data: superHeroes
+    })
+});
 
-app.get("/heroes/:name", (req, res) => {
-    let myHero = superhero.filter(superhero => superhero.name.toLowerCase() === req.params.name);
-    res.json(myHero);
-    // res.json(superhero.filter(superhero => superhero.name.toLowerCase() === req.params.name));
-})
+app.get("/heroes/:name", async(req, res) => {
+    const superHeroes = await SuperHeroes.findOne({name: req.params.name})
+    res.json({
+        message: "ok !",
+        data: superHeroes
+    })
+});
 
-app.get("/heroes/:name/powers", (req, res) => {
-    let myHero = superhero.filter(superhero => superhero.name.toLowerCase() === req.params.name);
-    res.json(myHero[0].power.join(" "));
-    // res.json(superhero.filter(superhero => superhero.name.toLowerCase() === req.params.name));
-})
+app.get("/heroes/:name/powers", async(req, res) => {
+    const superHeroes = await SuperHeroes.findOne({name: req.params.name})
+    res.json({
+        message: "ok !",
+        data: superHeroes.power.join(", ")
+    })
+});
+
 // POST
-app.post("/heroes", (req, res) => {
-    // const newHero = "test";
-    const newHero = req.body;
-    console.log(newHero);
-    res.json(
-        [...superhero,newHero]
-        // {"message": "hero create"}
-    );
-})
+app.post("/heroes", async(req, res) => {
+    const superHeroes = await SuperHeroes.create(req.body)
+    res.json({
+        message: "ok !",
+        data: superHeroes
+    })
+});
 
-app.post("/heroes/:name/powers", (req, res) => {
-    let hero = superhero.filter(superhero => superhero.name.toLowerCase() === req.params.name);
-
-    res.json([...hero[0].power,"new power"]);
-})
-
+app.post("/heroes/:name/powers", async(req, res) => {
+    const newPower = req.body.newPower;
+    const superHeroes = await SuperHeroes.findOneAndUpdate(
+        { name: req.params.name }, 
+        { $push: { power: newPower } })
+        const superHeroUpdate = await SuperHeroes.findOne({name: req.params.name})
+    res.json({
+        message: "ok !",
+        data: superHeroUpdate
+    });
+});
 
 // Server Started
-app.listen(port, () => {console.log('Server started on port:' , port)});
+app.listen(process.env.PORT, () => {console.log('Server started on port: ',process.env.PORT)});

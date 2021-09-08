@@ -10,7 +10,7 @@ router.get("/", restaurantController.getRestaurants);
 router.get("/:id", restaurantController.getRestaurantById);
 
 // ----- POST -----
-router.post("/", restaurantMiddleware.restaurantCheckIn, restaurantController.checkErrors);
+router.post("/", restaurantMiddleware.restaurantCheckIn(), restaurantController.checkErrors);
 
 // ----- PUT -----
 router.put("/:id", hotelControllers.getHotelNewName)

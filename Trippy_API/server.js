@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const expressValidator = require('express-validator');
-const passwordValidator = require('password-validator');
+
 
 const hotelsRouter = require('./router/hotelRouter');
 const restaurantsRouter = require('./router/restaurantRouter');

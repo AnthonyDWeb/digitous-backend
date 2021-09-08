@@ -1,6 +1,8 @@
 const restaurants = require('../json/restaurant.json');
+const expressValidator = require('express-validator')
 
 const getRestaurants = (req,res) => {
+    console.log(req.body)
     res.json({
         status: "OK!",
         data: restaurants
@@ -40,17 +42,25 @@ const deleteRestaurantById = (req,res) =>{
 };
 
 const checkErrors = (req,res) => {
+    
     const errors = expressValidator.validationResult(req);
-    if (errors.isEmpty() === false){
-        res.json(res.status(400));
-        return;
-    } else {
-        restaurants.push(req.body)
-        res.json({
-            success: true,
-            messages: "restaurant will be add"
-        })
+    console.log(errors)
+
+    if (errors.isEmpty() === false) {
+        
+        return res.status(400).json({
+            message: "error",
+            errors: errors.array()
+        });
     }
+
+    restaurants.push(req.body)
+    console.log(req.body.stars, typeof req.body.stars)
+    res.json({
+        success: true,
+        messages: "restaurant will be add",
+        data: restaurants
+    })
 };
 
 module.exports = {
