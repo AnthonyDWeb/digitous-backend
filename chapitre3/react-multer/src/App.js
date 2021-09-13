@@ -16,10 +16,10 @@ function App() {
     const getUsers = async() =>{
       const res = await fetch("http://localhost:8000/");
       const data = await res.json();
-      // setUsers(data) 
+      data &&
       console.log("res", res)
       console.log("data", data)
-      setUsers(data) 
+      setUsers(data.data) 
       // setUsers(await res.json()) 
     }
     getUsers()
@@ -44,6 +44,7 @@ function App() {
     setUsers([...users,{name: username}])
   };
 
+  
   return (
     <div>
         <p>Multer</p>

@@ -51,7 +51,7 @@ const SuperHeroes = mongoose.model("SuperHeroes", SuperHeroesSchema);
 
 // GET
 app.get("/heroes", async(req, res) => {
-    const superHeroes = await SuperHeroes.findOne()
+    const superHeroes = await SuperHeroes.find()
     res.json({
         message: "ok !",
         data: superHeroes
@@ -85,14 +85,20 @@ app.post("/heroes", async(req, res) => {
 
 app.post("/heroes/:name/powers", async(req, res) => {
     const newPower = req.body.newPower;
-    const superHeroes = await SuperHeroes.findOneAndUpdate(
+    await SuperHeroes.findOneAndUpdate(
         { name: req.params.name }, 
-        { $push: { power: newPower } })
-        const superHeroUpdate = await SuperHeroes.findOne({name: req.params.name})
-    res.json({
-        message: "ok !",
-        data: superHeroUpdate
-    });
+        { $push: { power: newPower } },
+        {new: true}, (err, hero) =>{
+            if (err) {
+                return res.json({
+                    status: "ERROR DETECTED",
+                })
+            }
+            res.json({
+                message: "ok !",
+                data: hero
+            });
+        })
 });
 
 // Server Started
