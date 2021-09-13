@@ -2,8 +2,8 @@ const express = require('express');
 const cors = require('cors');
 
 
-const hotelsRouter = require('Trippy_API/router/hotelRouter');
-const restaurantsRouter = require('Trippy_API/router/restaurantRouter');
+const hotelsRouter = require('./router/hotelRouter');
+const restaurantsRouter = require('./router/restaurantRouter');
 
 const PORT = 9002;
 const app = express();

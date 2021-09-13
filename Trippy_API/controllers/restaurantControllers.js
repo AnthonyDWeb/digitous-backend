@@ -1,4 +1,4 @@
-const restaurants = require('Trippy_API/json/restaurant');
+const restaurants = require('../json/restaurant');
 const expressValidator = require('express-validator')
 
 const getRestaurants = (req,res) => {

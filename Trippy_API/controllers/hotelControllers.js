@@ -1,4 +1,4 @@
-let hotels = require("Trippy_API/json/hotel");
+let hotels = require("../json/hotel");
 const expressValidator = require('express-validator')
 
 const getHotels = (req,res) => {

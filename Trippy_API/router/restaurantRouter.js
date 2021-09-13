@@ -1,7 +1,6 @@
 const express = require("express");
-const hotelControllers = require("Trippy_API/controllers/hotelControllers");
-const restaurantController = require('Trippy_API/controllers/restaurantControllers');
-const restaurantMiddleware = require('Trippy_API/middleware/restaurantMiddleware')
+const restaurantController = require('../controllers/restaurantControllers');
+const restaurantMiddleware = require('../middleware/restaurantMiddleware')
 
 const router = express.Router();
 
