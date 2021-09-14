@@ -59,6 +59,7 @@ app.get("/heroes", async(req, res) => {
 });
 
 app.get("/heroes/:name", async(req, res) => {
+    // const superHeroes = await SuperHeroes.findOne({name: req.params.name})
     const superHeroes = await SuperHeroes.findOne({name: req.params.name})
     res.json({
         message: "ok !",

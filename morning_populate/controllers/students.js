@@ -1,6 +1,5 @@
-const { Student }= require('../models/student')
+const { Student }= require('../models/student');
 const { Address }= require('../models/address');
-const address = require('../models/address');
 
 let studentAdress = [];
 
@@ -8,7 +7,8 @@ let studentAdress = [];
 // ----- GET -----
 const getStudents = async (req, res) => {
     try{
-        let student = await Student.find().populate("address")
+        let student = await Student.find()
+        // let student = await Student.find().populate("address")
         
 		res.json({
 			message: "OK",
