@@ -1,2 +1,3 @@
-node_modules
-digitous-init-backend
+node_modules/
+digitous-init-bac
+*.env
