@@ -1,4 +1,8 @@
-const evenOrNot = (num) =>{ return (num % 2 === 0 || num % 2 === -0) };
+const evenOrNot = (num) =>{ 
+    if( /^-?[0-9]*$/.test(num)){
+        return (num % 2 === 0 || num % 2 === -0) 
+    }
+};
 
 const formatDate = (date) => {
     var dateTest = new Date(date);
