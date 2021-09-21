@@ -4,9 +4,6 @@ const {validationResult} = require('express-validator');
 const {User} = require("../models/user");
 
 
-
-
-
 // ----- GET -----
 const admin = async(req,res) => {
     try {

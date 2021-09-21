@@ -2,6 +2,7 @@ const express = require('express');
 const userControllers = require('../controllers/user');
 const userMiddlewares = require('../middlewares/register')
 
+
 const router = express.Router();
 
 // ----- GET -----
